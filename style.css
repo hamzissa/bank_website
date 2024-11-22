@@ -1,0 +1,42 @@
+/* Styles for the navigation bar */
+.navbar {
+    position: fixed; /* Keep the navbar fixed at the top */
+    top: 0; /* Align it to the top */
+    left: 0; /* Align it to the left */
+    width: 100%; /* Full width across the screen */
+    background-color: #004080; /* Example background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding for spacing */
+    z-index: 1000; /* Ensure the navbar stays above other elements */
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space out elements */
+    align-items: center; /* Center items vertically */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    text-decoration: underline;
+}
+main{
+    position: fixed;
+    top:100px;
+}
+
+
+   
