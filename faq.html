@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - MyBank</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mortgage.html">Mortgage Calculator</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <section class="faq">
+        <div class="faq-container">
+            <h2>Frequently Asked Questions</h2>
+            <p>Find answers to some of the most common questions about our services.</p>
+            <div class="faq-item">
+                <button class="faq-question">What services does MyBank offer?</button>
+                <div class="faq-answer">
+                    <p>
+                        MyBank offers a wide range of services, including international banking, mortgages, savings accounts, foreign currency management, and investment opportunities.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How can I apply for a mortgage?</button>
+                <div class="faq-answer">
+                    <p>
+                        You can apply for a mortgage through our online application form or by visiting one of our branches. Ensure you have your financial details and identification ready.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What are the minimum requirements to open an account?</button>
+                <div class="faq-answer">
+                    <p>
+                        To open an account with us, you need to deposit a minimum of £100,000 (or currency equivalent) and provide proof of identity and address.
+                    </p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Are my deposits protected?</button>
+                <div class="faq-answer">
+                    <p>
+                        Yes, your deposits are protected by the relevant local compensation schemes. UK accounts are protected up to £85,000 by the Financial Services Compensation Scheme.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const faqQuestions = document.querySelectorAll(".faq-question");
+
+        faqQuestions.forEach((question) => {
+        question.addEventListener("click", () => {
+        const answer = question.nextElementSibling;
+        const isOpen = answer.style.display === "block";
+
+
+        document.querySelectorAll(".faq-answer").forEach((el) => (el.style.display = "none"));
+        faqQuestions.forEach((btn) => btn.classList.remove("active"));
+
+        if (!isOpen) {
+        answer.style.display = "block";
+        question.classList.add("active");
+        }
+        });
+        });
+        });
+        </script>
+
+    </section>
+
+</main>
+<footer>
+    <p>&copy; 2024 MyBank. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

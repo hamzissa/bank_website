@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator - MyBank</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mortgage.html">Mortgage Calculator</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <section class="mortgage-calculator">
+        <div class="calculator-container">
+            <h2>Mortgage Calculator</h2>
+            <p>
+                Use our calculator to estimate your monthly mortgage payment and determine eligibility based on your income.
+            </p>
+            <form id="mortgageForm">
+                <label for="loanAmount">Loan Amount (£):</label>
+                <input type="number" id="loanAmount" name="loanAmount" placeholder="Enter loan amount" required>
+
+                <label for="loanTerm">Loan Term (Years):</label>
+                <input type="number" id="loanTerm" name="loanTerm" placeholder="Enter loan term in years" required>
+
+                <label for="monthlyIncome">Monthly Income (£):</label>
+                <input type="number" id="monthlyIncome" name="monthlyIncome" placeholder="Enter your monthly income" required>
+
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="result"></div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const form = document.getElementById("mortgageForm");
+                const result = document.getElementById("result");
+
+                form.addEventListener("submit", (event) => {
+                    event.preventDefault(); // Prevent default form submission
+
+                    // Get input values
+                    const loanAmount = parseFloat(document.getElementById("loanAmount").value.trim());
+                    const loanTerm = parseInt(document.getElementById("loanTerm").value.trim());
+                    const monthlyIncome = parseFloat(document.getElementById("monthlyIncome").value.trim());
+
+                    // Validation
+                    if (isNaN(loanAmount) || loanAmount <= 0) {
+                        result.textContent = "Please enter a valid loan amount.";
+                        result.style.color = "red";
+                        return;
+                    }
+                    if (isNaN(loanTerm) || loanTerm <= 0) {
+                        result.textContent = "Please enter a valid loan term.";
+                        result.style.color = "red";
+                        return;
+                    }
+                    if (isNaN(monthlyIncome) || monthlyIncome <= 0) {
+                        result.textContent = "Please enter a valid monthly income.";
+                        result.style.color = "red";
+                        return;
+                    }
+
+                    // Mortgage calculation
+                    const annualRate = 0.045; // Fixed annual interest rate of 4.5%
+                    const monthlyRate = annualRate / 12;
+                    const totalPayments = loanTerm * 12;
+                    const monthlyPayment =
+                        (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalPayments)) /
+                        (Math.pow(1 + monthlyRate, totalPayments) - 1);
+
+                    // Eligibility check
+                    const affordabilityThreshold = monthlyIncome * 0.3; // 30% of monthly income
+                    const isAffordable = monthlyPayment <= affordabilityThreshold;
+
+                    // Display results
+                    result.style.color = isAffordable ? "green" : "red";
+                    result.innerHTML = `
+          <p><strong>Monthly Payment:</strong> £${monthlyPayment.toFixed(2)}</p>
+          <p><strong>Total Payment:</strong> £${(monthlyPayment * totalPayments).toFixed(2)}</p>
+          <p><strong>Total Interest:</strong> £${((monthlyPayment * totalPayments) - loanAmount).toFixed(2)}</p>
+          <p><strong>Remaining Income:</strong> £${(monthlyIncome - monthlyPayment).toFixed(2)}</p>
+          <p><strong>Status:</strong> ${isAffordable ? "Loan approved!" : "Loan denied: Monthly payment exceeds 30% of your income."}</p>
+        `;
+                });
+            });
+        </script>
+    </section>
+
+</main>
+<footer>
+    <p>&copy; 2024 MyBank. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

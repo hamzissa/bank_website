@@ -1,0 +1,41 @@
+#file organiser
+files=("document.txt" "image.jpg" "script.sh" "notes.docx" "photo.png")
+
+
+for file in "${files[@]}"
+do
+
+  extension="${file##*.}"
+
+
+  case "$extension" in
+    txt)
+      echo "Moving $file to Text_Files folder."
+      ;;
+    jpg|png)
+      echo "Moving $file to Images folder."
+      ;;
+    sh)
+      echo "Moving $file to Scripts folder."
+      ;;
+    docx)
+      echo "Moving $file to Documents folder."
+      ;;
+    *)
+      echo "Unknown file type: $file"
+      ;;
+  esac
+done
+
+#disk_usage
+
+
+disk_usage=85
+threshold=80
+
+
+if [ "$disk_usage" -gt "$threshold" ]; then
+  echo "Warning: Disk usage is at $disk_usage%, which exceeds the threshold of $threshold%!"
+else
+  echo "Disk usage is at $disk_usage%, within acceptable limits."
+fi
